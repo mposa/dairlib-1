@@ -16,6 +16,7 @@ cc_library(
     ],
     deps = [
         "@drake//systems/framework",
+        "vector_aggregator"
     ],
 )
 
@@ -31,4 +32,19 @@ cc_test(
         "@drake//systems/framework/test_utilities",
     ],
     size = "small"
+)
+
+cc_library(
+  name = "vector_aggregator",
+  hdrs = [
+          "vector_aggregator.h"
+          ],
+  deps = [
+        "//multibody:utils",
+        "@drake//systems/lcm",
+        "@drake//systems/framework:diagram_builder",
+        "@drake//systems/framework:leaf_system",
+        "@lcm",
+        "//systems/framework:vector"
+        ]
 )

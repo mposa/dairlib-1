@@ -1,0 +1,39 @@
+load(
+    "@drake//tools/skylark:pybind.bzl",
+    "pybind_py_library",
+)
+
+pybind_py_library(
+    name = "vector_aggregator_py",
+    cc_so_name = "vector_aggregator",
+    cc_srcs = ["vector_aggregator_py.cc"],
+    cc_deps = [
+        "//systems/primitives:vector_aggregator",
+        "@drake//bindings/pydrake/systems:systems_pybind",
+        "@drake//bindings/pydrake/util:cpp_template_pybind",
+    ],
+    py_deps = ["@drake//bindings/pydrake"],
+    py_imports = ["."],
+)
+
+pybind_py_library(
+    name = "cassie_utils_py",
+    cc_so_name = "cassie_utils",
+    cc_srcs = ["cassie_utils_py.cc"],
+    cc_deps = [
+        "//examples/Cassie:cassie_utils",
+        "@drake//bindings/pydrake/systems:systems_pybind",
+        "@drake//bindings/pydrake/util:cpp_template_pybind",
+    ],
+    py_deps = ["@drake//bindings/pydrake"],
+    py_imports = ["."],
+)
+
+py_test(
+    name = "lcm_log_parser_test",
+    srcs = ["test/lcm_log_parser_test.py"],
+    deps = [
+        ":cassie_utils_py",
+        ":vector_aggregator_py",
+    ],
+)

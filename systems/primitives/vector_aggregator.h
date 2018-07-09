@@ -11,8 +11,10 @@
 
 namespace dairlib {
 namespace systems {
-namespace lcm {
 
+/// A class to log TimestampedVector signals and retrieve the data as an Eigen
+/// matrix. Similar to Drake's SignalLoggerm, but specialized to
+/// TimestampedVector. Possibly redundant (mposa).
 class VectorAggregator : public drake::systems::LeafSystem<double> {
  public:
   DRAKE_NO_COPY_NO_MOVE_NO_ASSIGN(VectorAggregator)
@@ -82,6 +84,5 @@ class VectorAggregator : public drake::systems::LeafSystem<double> {
   mutable std::vector<double> received_timestamp_;
 };
 
-}  // namespace lcm
 }  // namespace systems
 }  // namespace dairlib
